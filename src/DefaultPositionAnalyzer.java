@@ -1,3 +1,4 @@
+import java.util.Collections;
 import java.util.List;
 
 import net.humbleprogrammer.humble.BitUtil;
@@ -17,25 +18,46 @@ public class DefaultPositionAnalyzer implements PositionAnalyzer {
 	@Override
 	public Analysis performAnalysis(VirtualBoard virtualBoard) {
 		Analysis analysis = new Analysis();
-		List<VirtualMove> moves = moveGenerator.generateMoves(virtualBoard);
 		
+		VirtualMove move = findHangingMove(virtualBoard);
+		if (move == null){
+			List<VirtualMove> moves = getMoves(virtualBoard);
+			Collections.shuffle(moves);
+			LucidMoveMaker moveMaker = new LucidMoveMaker();
+			String fen = virtualBoard.getFEN();
+			for (VirtualMove virtualMove : moves){
+				moveMaker.makeMove(virtualMove.toString(), virtualBoard);
+				if (findHangingMove(virtualBoard) == null){
+					move = virtualMove;
+				}
+				virtualBoard.setFEN(fen);
+				if (move != null)
+					break;
+			}
+			if (move == null) move = moves.get(0);
+		}
+		analysis.setBestMove(move);
+		return analysis;		
+	}
+
+	private VirtualMove findHangingMove(VirtualBoard virtualBoard) {
+		List<VirtualMove> moves = getMoves(virtualBoard);
 		Board board = BoardFactory.createFromFEN(virtualBoard.getFEN());
 		long bbCaptures = Evaluator.findEnPrisePieces(board);
-
 		for ( long bb = bbCaptures; bb != 0L; bb &= (bb - 1) )
         {
 			String square = Square.toString(BitUtil.first(bb));
 			for (VirtualMove move : moves){
 				if (move.toString().contains(square)){
-					analysis.setBestMove(move);
-					break;
+					return move;
 				}
-					
 			}
         }
-		
-		analysis.setBestMove(moves.get(0));
-		return analysis;
+		return null;
+	}
+
+	private List<VirtualMove> getMoves(VirtualBoard virtualBoard) {
+		return moveGenerator.generateMoves(virtualBoard);
 	}
 
 }

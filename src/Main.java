@@ -14,7 +14,9 @@ public class Main {
 		while(true){
 			System.out.print("> ");
 			String command = scanner.nextLine();
-			if (validator.isValidMove(command, board)){
+			if (command.toLowerCase() == "fen"){
+				System.out.println(board.getFEN());
+			} else if (validator.isValidMove(command, board)){
 				moveMaker.makeMove(command, board);
 				String move = analyzer.performAnalysis(board).getBestMove();
 				System.out.println("trying to play move " + move);
