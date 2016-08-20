@@ -20,13 +20,21 @@ public class BasicTest {
 	}
 	
 	private void test(String fen, String bestMove) {
-		PositionAnalyzer analyzer = new DefaultPositionAnalyzer(new LucidMoveGenerator());
+		LucidMoveGenerator moveGenerator = new LucidMoveGenerator();
+		PositionAnalyzer analyzer = new CompositePositionAnalyzer(
+				new TakeHangingPieceAnalyzer(moveGenerator),
+				new FindMoveThatDoesntHangPiece(moveGenerator),
+				new PickAnyMoveAnalyzer(moveGenerator));
 		VirtualBoard board = new VirtualBoard(fen);
 		Analysis analysis = analyzer.performAnalysis(board);
 		assertEquals(bestMove, analysis.getBestMove());
 	}	
 	private void testNot(String fen, String badMove) {
-		PositionAnalyzer analyzer = new DefaultPositionAnalyzer(new LucidMoveGenerator());
+		LucidMoveGenerator moveGenerator = new LucidMoveGenerator();
+		PositionAnalyzer analyzer = new CompositePositionAnalyzer(
+				new TakeHangingPieceAnalyzer(moveGenerator),
+				new FindMoveThatDoesntHangPiece(moveGenerator),
+				new PickAnyMoveAnalyzer(moveGenerator));
 		VirtualBoard board = new VirtualBoard(fen);
 		Analysis analysis = analyzer.performAnalysis(board);
 		assertNotEquals(badMove, analysis.getBestMove());

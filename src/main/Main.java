@@ -11,7 +11,11 @@ public class Main {
 	public static void main(String[] args) {
 		MoveValidator validator = new LucidMoveValidator();
 		MoveMaker moveMaker = new LucidMoveMaker();
-		PositionAnalyzer analyzer = new DefaultPositionAnalyzer(new LucidMoveGenerator());
+		LucidMoveGenerator moveGenerator = new LucidMoveGenerator();
+		PositionAnalyzer analyzer = new CompositePositionAnalyzer(
+				new TakeHangingPieceAnalyzer(moveGenerator),
+				new FindMoveThatDoesntHangPiece(moveGenerator),
+				new PickAnyMoveAnalyzer(moveGenerator));
 		VirtualBoard board = new VirtualBoard("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
 		
 		Scanner scanner = null;
