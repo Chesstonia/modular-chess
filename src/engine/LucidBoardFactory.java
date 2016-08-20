@@ -1,7 +1,7 @@
+package engine;
 
-public class DefaultBoardFactory implements IBoardFactory {
+public class LucidBoardFactory implements IBoardFactory {
 
-	@Override
 	public VirtualBoard createFromFEN(String fen) {
 		return new VirtualBoard(fen);
 	}

@@ -1,3 +1,4 @@
+package engine;
 
 public class VirtualMove {
 	private String from, to;

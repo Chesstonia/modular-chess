@@ -1,3 +1,4 @@
+package engine;
 import net.humbleprogrammer.maxx.Board;
 import net.humbleprogrammer.maxx.Move;
 import net.humbleprogrammer.maxx.factories.BoardFactory;
