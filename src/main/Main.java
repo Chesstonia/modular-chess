@@ -25,8 +25,13 @@ public class Main {
 		while(true){
 			System.out.print("> ");
 			String command = scanner.nextLine();
-			if (command.toLowerCase() == "fen"){
+			if (command.toLowerCase().equals("fen")){
 				System.out.println(board.getFEN());
+			} else if (command.toLowerCase().equals("go")){
+				String move = analyzer.performAnalysis(board).getBestMove();
+				System.out.println("trying to play move " + move);
+				moveMaker.makeMove(move, board);
+				System.out.println(move);
 			} else if (validator.isValidMove(command, board)){
 				moveMaker.makeMove(command, board);
 				String move = analyzer.performAnalysis(board).getBestMove();
