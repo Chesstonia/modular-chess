@@ -2,6 +2,7 @@ package main;
 
 import engine.*;
 import java.util.Scanner;
+import java.util.Stack;
 
 import lucid.LucidMoveGenerator;
 import lucid.LucidMoveMaker;
@@ -17,27 +18,42 @@ public class Main {
 				new FindMoveThatDoesntHangPiece(moveGenerator),
 				new PickAnyMoveAnalyzer(moveGenerator));
 		VirtualBoard board = new VirtualBoard("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+		Stack<String> previous = new Stack<String>();
 		
 		Scanner scanner = null;
 		try { 
 			scanner = new Scanner(System.in);
-
+		boolean on = false;
 		while(true){
 			System.out.print("> ");
 			String command = scanner.nextLine();
 			if (command.toLowerCase().equals("fen")){
 				System.out.println(board.getFEN());
+			} else if (command.toLowerCase().equals("on")){
+				on = true;
+				String move = analyzer.performAnalysis(board).getBestMove();
+				previous.push(board.getFEN());
+				moveMaker.makeMove(move, board);
+				System.out.println(move);
 			} else if (command.toLowerCase().equals("go")){
 				String move = analyzer.performAnalysis(board).getBestMove();
-				System.out.println("trying to play move " + move);
+				previous.push(board.getFEN());
 				moveMaker.makeMove(move, board);
 				System.out.println(move);
+			} else if (command.toLowerCase().equals("off")){
+				on = false;
 			} else if (validator.isValidMove(command, board)){
+				previous.push(board.getFEN());
 				moveMaker.makeMove(command, board);
-				String move = analyzer.performAnalysis(board).getBestMove();
-				System.out.println("trying to play move " + move);
-				moveMaker.makeMove(move, board);
-				System.out.println(move);
+				if (on){
+					String move = analyzer.performAnalysis(board).getBestMove();
+					previous.push(board.getFEN());
+					moveMaker.makeMove(move, board);
+					System.out.println(move);
+				}
+			} else if (command.toLowerCase().equals("back")){
+				if (!previous.isEmpty())
+					board.setFEN(previous.pop());
 			} else {
 				System.out.println("Invalid move '" + command + "'");
 			}
