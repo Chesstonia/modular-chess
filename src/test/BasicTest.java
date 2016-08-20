@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import engine.*;
+import lucid.LucidMoveGenerator;
 
 public class BasicTest {
 

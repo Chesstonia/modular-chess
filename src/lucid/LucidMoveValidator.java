@@ -1,4 +1,6 @@
-package engine;
+package lucid;
+import engine.MoveValidator;
+import engine.VirtualBoard;
 import net.humbleprogrammer.maxx.Board;
 import net.humbleprogrammer.maxx.Move;
 import net.humbleprogrammer.maxx.factories.BoardFactory;

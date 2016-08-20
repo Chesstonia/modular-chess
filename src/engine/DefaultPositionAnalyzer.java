@@ -3,6 +3,7 @@ package engine;
 import java.util.Collections;
 import java.util.List;
 
+import lucid.LucidMoveMaker;
 import net.humbleprogrammer.humble.BitUtil;
 import net.humbleprogrammer.maxx.Board;
 import net.humbleprogrammer.maxx.Evaluator;
@@ -19,30 +20,42 @@ public class DefaultPositionAnalyzer implements PositionAnalyzer {
 	
 	@Override
 	public Analysis performAnalysis(VirtualBoard virtualBoard) {
-		Analysis analysis = new Analysis();
+		VirtualMove move = findMoveToTakeHangingPiece(virtualBoard);
+		if (move != null)
+			return createAnalysis(move, "found a hanging piece");
 		
-		VirtualMove move = findHangingMove(virtualBoard);
-		if (move == null){
-			List<VirtualMove> moves = getMoves(virtualBoard);
-			Collections.shuffle(moves);
-			LucidMoveMaker moveMaker = new LucidMoveMaker();
-			String fen = virtualBoard.getFEN();
-			for (VirtualMove virtualMove : moves){
-				moveMaker.makeMove(virtualMove.toString(), virtualBoard);
-				if (findHangingMove(virtualBoard) == null){
-					move = virtualMove;
-				}
-				virtualBoard.setFEN(fen);
-				if (move != null)
-					break;
-			}
-			if (move == null) move = moves.get(0);
-		}
-		analysis.setBestMove(move);
-		return analysis;		
+		List<VirtualMove> moves = getMoves(virtualBoard);
+		Collections.shuffle(moves);
+		move = findMoveThatDoesntHangPiece(virtualBoard, move, moves);
+		if (move != null) 
+			return createAnalysis(move, "found a move that doesn't hang a piece");
+		
+		return createAnalysis(moves.get(0), "just picking a random move");
 	}
 
-	private VirtualMove findHangingMove(VirtualBoard virtualBoard) {
+	private Analysis createAnalysis(VirtualMove move, String reason) {
+		Analysis analysis = new Analysis();		
+		analysis.setBestMove(move);
+		return analysis;
+	}
+
+	private VirtualMove findMoveThatDoesntHangPiece(VirtualBoard virtualBoard, VirtualMove move,
+			List<VirtualMove> moves) {
+		LucidMoveMaker moveMaker = new LucidMoveMaker();
+		String fen = virtualBoard.getFEN();
+		for (VirtualMove virtualMove : moves){
+			moveMaker.makeMove(virtualMove.toString(), virtualBoard);
+			if (findMoveToTakeHangingPiece(virtualBoard) == null){
+				move = virtualMove;
+			}
+			virtualBoard.setFEN(fen);
+			if (move != null)
+				break;
+		}
+		return move;
+	}
+
+	private VirtualMove findMoveToTakeHangingPiece(VirtualBoard virtualBoard) {
 		List<VirtualMove> moves = getMoves(virtualBoard);
 		Board board = BoardFactory.createFromFEN(virtualBoard.getFEN());
 		long bbCaptures = Evaluator.findEnPrisePieces(board);

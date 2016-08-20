@@ -1,8 +1,11 @@
-package engine;
+package lucid;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import engine.MoveGenerator;
+import engine.VirtualBoard;
+import engine.VirtualMove;
 import net.humbleprogrammer.maxx.Board;
 import net.humbleprogrammer.maxx.Move;
 import net.humbleprogrammer.maxx.MoveList;
@@ -44,6 +47,11 @@ public class LucidMoveGenerator implements MoveGenerator {
 		String fen = virtualBoard.getFEN();
 		Board board = BoardFactory.createFromFEN(fen);
 		MoveList list = MoveList.generate(board);
+		ArrayList<VirtualMove> result = translateLucidMovesToVirtual(board, list);
+		return result;
+	}
+
+	private ArrayList<VirtualMove> translateLucidMovesToVirtual(Board board, MoveList list) {
 		ArrayList<VirtualMove> result = new ArrayList<VirtualMove>();
 		for (Move move : list){
 			result.add(new VirtualMove(squares.get(move.iSqFrom), squares.get(move.iSqTo), MoveFactory.toSAN(board,  move,  false)));

@@ -1,4 +1,7 @@
-package engine;
+package lucid;
+
+import engine.IBoardFactory;
+import engine.VirtualBoard;
 
 public class LucidBoardFactory implements IBoardFactory {
 

@@ -1,5 +1,11 @@
-package engine;
+package main;
+
+import engine.*;
 import java.util.Scanner;
+
+import lucid.LucidMoveGenerator;
+import lucid.LucidMoveMaker;
+import lucid.LucidMoveValidator;
 
 public class Main {
 	public static void main(String[] args) {
