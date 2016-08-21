@@ -1,7 +1,6 @@
 package lucid;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import engine.MoveGenerator;
@@ -29,7 +28,6 @@ public class LucidMoveGenerator implements MoveGenerator {
 		for (Move move : list){
 			result.add(new VirtualMove(translator.get(move.iSqFrom), translator.get(move.iSqTo), MoveFactory.toSAN(board,  move,  false)));
 		}
-		Collections.shuffle(result);
 		return result;
 	}
 	

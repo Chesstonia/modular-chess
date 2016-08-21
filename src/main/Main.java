@@ -12,7 +12,7 @@ public class Main {
 	public static void main(String[] args) {
 		MoveValidator validator = new LucidMoveValidator();
 		MoveMaker moveMaker = new LucidMoveMaker();
-		LucidMoveGenerator moveGenerator = new LucidMoveGenerator();
+		MoveGenerator moveGenerator = new MoveShuffler(new LucidMoveGenerator());
 		PositionAnalyzer analyzer = new CompositePositionAnalyzer(
 				new TakeHangingPieceAnalyzer(moveGenerator),
 				new FindMoveThatDoesntHangPiece(moveGenerator),
