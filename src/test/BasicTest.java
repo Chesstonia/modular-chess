@@ -26,7 +26,7 @@ public class BasicTest {
 				new FindMoveThatDoesntHangPiece(moveGenerator),
 				new PickAnyMoveAnalyzer(moveGenerator));
 		VirtualBoard board = new VirtualBoard(fen);
-		Analysis analysis = analyzer.performAnalysis(board);
+		Analysis analysis = analyzer.improveAnalysis(new Analysis(board));
 		assertEquals(bestMove, analysis.getBestMove());
 	}	
 	private void testNot(String fen, String badMove) {
@@ -36,7 +36,7 @@ public class BasicTest {
 				new FindMoveThatDoesntHangPiece(moveGenerator),
 				new PickAnyMoveAnalyzer(moveGenerator));
 		VirtualBoard board = new VirtualBoard(fen);
-		Analysis analysis = analyzer.performAnalysis(board);
+		Analysis analysis = analyzer.improveAnalysis(new Analysis(board));
 		assertNotEquals(badMove, analysis.getBestMove());
 	}
 

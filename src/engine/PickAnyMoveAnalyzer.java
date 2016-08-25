@@ -8,8 +8,10 @@ public class PickAnyMoveAnalyzer implements PositionAnalyzer {
 	}
 	
 	@Override
-	public Analysis performAnalysis(VirtualBoard board) {
-		return new Analysis(generator.generateMoves(board).get(0), "just because");
+	public Analysis improveAnalysis(Analysis analysis) {
+		VirtualBoard board = analysis.getBoard();
+		analysis.setBestMove(generator.generateMoves(board).get(0), "just because");
+		return analysis;
 	}
 
 }

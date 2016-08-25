@@ -21,6 +21,7 @@ public class Main {
 		Stack<String> previous = new Stack<String>();
 		
 		Scanner scanner = null;
+		Analysis analysis = new Analysis(board);
 		try { 
 			scanner = new Scanner(System.in);
 		boolean on = false;
@@ -31,12 +32,12 @@ public class Main {
 				System.out.println(board.getFEN());
 			} else if (command.toLowerCase().equals("on")){
 				on = true;
-				String move = analyzer.performAnalysis(board).getBestMove();
+				String move = analyzer.improveAnalysis(analysis).getBestMove();
 				previous.push(board.getFEN());
 				moveMaker.makeMove(move, board);
 				System.out.println(move);
 			} else if (command.toLowerCase().equals("go")){
-				String move = analyzer.performAnalysis(board).getBestMove();
+				String move = analyzer.improveAnalysis(analysis).getBestMove();
 				previous.push(board.getFEN());
 				moveMaker.makeMove(move, board);
 				System.out.println(move);
@@ -46,7 +47,7 @@ public class Main {
 				previous.push(board.getFEN());
 				moveMaker.makeMove(command, board);
 				if (on){
-					String move = analyzer.performAnalysis(board).getBestMove();
+					String move = analyzer.improveAnalysis(analysis).getBestMove();
 					previous.push(board.getFEN());
 					moveMaker.makeMove(move, board);
 					System.out.println(move);

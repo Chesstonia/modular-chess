@@ -17,12 +17,14 @@ public class TakeHangingPieceAnalyzer implements PositionAnalyzer {
 	}
 	
 	@Override
-	public Analysis performAnalysis(VirtualBoard board) {
-		Analysis result = null;
+	public Analysis improveAnalysis(Analysis analysis) {
+		VirtualBoard board = analysis.getBoard();
 		VirtualMove move = findMoveToTakeHangingPiece(board);
-		if (move != null)
-			result = new Analysis(move, "found a hanging piece");
-		return result;
+		if (move != null){
+			analysis.setBestMove(move, "found a hanging piece");
+			analysis.done();
+		}
+		return analysis;
 	}
 
 	private VirtualMove findMoveToTakeHangingPiece(VirtualBoard virtualBoard) {

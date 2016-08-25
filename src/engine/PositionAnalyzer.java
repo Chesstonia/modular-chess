@@ -2,6 +2,6 @@ package engine;
 
 public interface PositionAnalyzer {
 
-	Analysis performAnalysis(VirtualBoard board);
+	Analysis improveAnalysis(Analysis analysis);
 	
 }

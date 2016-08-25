@@ -8,10 +8,10 @@ public class CompositePositionAnalyzer implements PositionAnalyzer {
 	}
 
 	@Override
-	public Analysis performAnalysis(VirtualBoard board) {
+	public Analysis improveAnalysis(Analysis analysis) {
 		for (PositionAnalyzer analyzer : analyzers){
-			Analysis analysis = analyzer.performAnalysis(board);
-			if (analysis != null)
+			analyzer.improveAnalysis(analysis);
+			if (analysis.isComplete())
 				return analysis;
 		}
 		return null;
