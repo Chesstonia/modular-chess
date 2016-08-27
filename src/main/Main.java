@@ -1,6 +1,7 @@
 package main;
 
 import engine.*;
+import engine.analyzers.*;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -15,7 +16,7 @@ public class Main {
 		MoveGenerator moveGenerator = new MoveShuffler(new LucidMoveGenerator());
 		PositionAnalyzer analyzer = new CompositePositionAnalyzer(
 				new TakeHangingPieceAnalyzer(moveGenerator),
-				new FindMoveThatDoesntHangPiece(moveGenerator),
+				new FindMoveThatDoesntHangPieceAnalyzer(moveGenerator),
 				new PickAnyMoveAnalyzer(moveGenerator));
 		VirtualBoard board = new VirtualBoard("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
 		Stack<String> previous = new Stack<String>();

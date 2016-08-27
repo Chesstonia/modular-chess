@@ -1,11 +1,10 @@
-package engine;
+package engine.analyzers;
 
 import java.util.List;
 
+import engine.*;
 import net.humbleprogrammer.humble.BitUtil;
-import net.humbleprogrammer.maxx.Board;
-import net.humbleprogrammer.maxx.Evaluator;
-import net.humbleprogrammer.maxx.Square;
+import net.humbleprogrammer.maxx.*;
 import net.humbleprogrammer.maxx.factories.BoardFactory;
 
 public class TakeHangingPieceAnalyzer implements PositionAnalyzer {

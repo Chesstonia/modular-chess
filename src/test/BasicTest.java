@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import engine.*;
+import engine.analyzers.*;
 import lucid.LucidMoveGenerator;
 
 public class BasicTest {
@@ -23,7 +24,7 @@ public class BasicTest {
 		LucidMoveGenerator moveGenerator = new LucidMoveGenerator();
 		PositionAnalyzer analyzer = new CompositePositionAnalyzer(
 				new TakeHangingPieceAnalyzer(moveGenerator),
-				new FindMoveThatDoesntHangPiece(moveGenerator),
+				new FindMoveThatDoesntHangPieceAnalyzer(moveGenerator),
 				new PickAnyMoveAnalyzer(moveGenerator));
 		VirtualBoard board = new VirtualBoard(fen);
 		Analysis analysis = analyzer.improveAnalysis(new Analysis(board));
@@ -33,7 +34,7 @@ public class BasicTest {
 		LucidMoveGenerator moveGenerator = new LucidMoveGenerator();
 		PositionAnalyzer analyzer = new CompositePositionAnalyzer(
 				new TakeHangingPieceAnalyzer(moveGenerator),
-				new FindMoveThatDoesntHangPiece(moveGenerator),
+				new FindMoveThatDoesntHangPieceAnalyzer(moveGenerator),
 				new PickAnyMoveAnalyzer(moveGenerator));
 		VirtualBoard board = new VirtualBoard(fen);
 		Analysis analysis = analyzer.improveAnalysis(new Analysis(board));

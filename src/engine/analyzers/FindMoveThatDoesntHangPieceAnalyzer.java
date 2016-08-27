@@ -1,18 +1,17 @@
-package engine;
+package engine.analyzers;
 
 import java.util.List;
 
+import engine.*;
 import lucid.LucidMoveMaker;
 import net.humbleprogrammer.humble.BitUtil;
-import net.humbleprogrammer.maxx.Board;
-import net.humbleprogrammer.maxx.Evaluator;
-import net.humbleprogrammer.maxx.Square;
+import net.humbleprogrammer.maxx.*;
 import net.humbleprogrammer.maxx.factories.BoardFactory;
 
-public class FindMoveThatDoesntHangPiece implements PositionAnalyzer {
+public class FindMoveThatDoesntHangPieceAnalyzer implements PositionAnalyzer {
 	private MoveGenerator generator;
 
-	public FindMoveThatDoesntHangPiece(MoveGenerator generator){
+	public FindMoveThatDoesntHangPieceAnalyzer(MoveGenerator generator){
 		this.generator = generator;
 	}
 	

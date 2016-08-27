@@ -1,4 +1,6 @@
-package engine;
+package engine.analyzers;
+
+import engine.*;
 
 public class PickAnyMoveAnalyzer implements PositionAnalyzer {
 	private MoveGenerator generator;

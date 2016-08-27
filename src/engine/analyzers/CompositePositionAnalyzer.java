@@ -1,4 +1,7 @@
-package engine;
+package engine.analyzers;
+
+import engine.Analysis;
+import engine.PositionAnalyzer;
 
 public class CompositePositionAnalyzer implements PositionAnalyzer {
 	private PositionAnalyzer[] analyzers;
