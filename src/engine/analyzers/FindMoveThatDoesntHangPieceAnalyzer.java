@@ -18,7 +18,7 @@ public class FindMoveThatDoesntHangPieceAnalyzer implements PositionAnalyzer {
 	@Override
 	public Analysis improveAnalysis(Analysis analysis) {
 		VirtualBoard board = analysis.getBoard();
-		VirtualMove move = findMoveThatDoesntHangPiece(board, generator.generateMoves(board));
+		String move = findMoveThatDoesntHangPiece(board, generator.generateMoves(board));
 		if (move != null){
 			analysis.setBestMove(move, "found a move that doesn't hang a piece");
 			analysis.done();
@@ -26,12 +26,12 @@ public class FindMoveThatDoesntHangPieceAnalyzer implements PositionAnalyzer {
 		return analysis;
 	}
 
-	private VirtualMove findMoveThatDoesntHangPiece(VirtualBoard virtualBoard, List<VirtualMove> moves) {
+	private String findMoveThatDoesntHangPiece(VirtualBoard virtualBoard, List<String> moves) {
 		LucidMoveMaker moveMaker = new LucidMoveMaker();
 		String fen = virtualBoard.getFEN();
-		for (VirtualMove virtualMove : moves){
+		for (String virtualMove : moves){
 			moveMaker.makeMove(virtualMove.toString(), virtualBoard);
-			VirtualMove refutation = findMoveToTakeHangingPiece(virtualBoard);
+			String refutation = findMoveToTakeHangingPiece(virtualBoard);
 			virtualBoard.setFEN(fen);
 			if (refutation == null)
 				return virtualMove;
@@ -40,15 +40,15 @@ public class FindMoveThatDoesntHangPieceAnalyzer implements PositionAnalyzer {
 	}
 	
 
-	private VirtualMove findMoveToTakeHangingPiece(VirtualBoard virtualBoard) {
-		List<VirtualMove> moves = generator.generateMoves(virtualBoard);
+	private String findMoveToTakeHangingPiece(VirtualBoard virtualBoard) {
+		List<String> moves = generator.generateMoves(virtualBoard);
 		Board board = BoardFactory.createFromFEN(virtualBoard.getFEN());
 		long bbCaptures = Evaluator.findEnPrisePieces(board);
 		for ( long bb = bbCaptures; bb != 0L; bb &= (bb - 1) )
         {
 			String square = Square.toString(BitUtil.first(bb));
-			for (VirtualMove move : moves){
-				if (move.toString().contains(square)){
+			for (String move : moves){
+				if (move.contains(square)){
 					return move;
 				}
 			}

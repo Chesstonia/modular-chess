@@ -21,7 +21,7 @@ public class Analysis {
 		return reason;
 	}
 
-	public void setBestMove(VirtualMove move, String reason) {
+	public void setBestMove(String move, String reason) {
 		this.bestMove = move.toString();
 		this.reason = reason;
 	}

@@ -18,7 +18,7 @@ public class TakeHangingPieceAnalyzer implements PositionAnalyzer {
 	@Override
 	public Analysis improveAnalysis(Analysis analysis) {
 		VirtualBoard board = analysis.getBoard();
-		VirtualMove move = findMoveToTakeHangingPiece(board);
+		String move = findMoveToTakeHangingPiece(board);
 		if (move != null){
 			analysis.setBestMove(move, "found a hanging piece");
 			analysis.done();
@@ -26,14 +26,14 @@ public class TakeHangingPieceAnalyzer implements PositionAnalyzer {
 		return analysis;
 	}
 
-	private VirtualMove findMoveToTakeHangingPiece(VirtualBoard virtualBoard) {
-		List<VirtualMove> moves = getMoves(virtualBoard);
+	private String findMoveToTakeHangingPiece(VirtualBoard virtualBoard) {
+		List<String> moves = getMoves(virtualBoard);
 		Board board = BoardFactory.createFromFEN(virtualBoard.getFEN());
 		long bbCaptures = Evaluator.findEnPrisePieces(board);
 		for ( long bb = bbCaptures; bb != 0L; bb &= (bb - 1) )
         {
 			String square = Square.toString(BitUtil.first(bb));
-			for (VirtualMove move : moves){
+			for (String move : moves){
 				if (move.toString().contains(square)){
 					return move;
 				}
@@ -42,7 +42,7 @@ public class TakeHangingPieceAnalyzer implements PositionAnalyzer {
 		return null;
 	}
 
-	private List<VirtualMove> getMoves(VirtualBoard virtualBoard) {
+	private List<String> getMoves(VirtualBoard virtualBoard) {
 		return moveGenerator.generateMoves(virtualBoard);
 	}
 }

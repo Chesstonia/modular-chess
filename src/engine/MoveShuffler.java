@@ -12,8 +12,8 @@ public class MoveShuffler implements MoveGenerator {
 	}
 	
 	@Override
-	public List<VirtualMove> generateMoves(VirtualBoard board) {
-		List<VirtualMove> result = this.moveGenerator.generateMoves(board);
+	public List<String> generateMoves(VirtualBoard board) {
+		List<String> result = this.moveGenerator.generateMoves(board);
 		Collections.shuffle(result);
 		return result;
 	}
