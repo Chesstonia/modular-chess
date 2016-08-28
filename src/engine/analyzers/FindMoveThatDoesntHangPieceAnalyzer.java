@@ -18,7 +18,7 @@ public class FindMoveThatDoesntHangPieceAnalyzer implements PositionAnalyzer {
 	@Override
 	public Analysis improveAnalysis(Analysis analysis) {
 		VirtualBoard board = analysis.getBoard();
-		String move = findMoveThatDoesntHangPiece(board, generator.generateMoves(board));
+		String move = findMoveThatDoesntHangPiece(board, analysis.getTag("MoveList").getParameters());
 		if (move != null){
 			analysis.setBestMove(move, "found a move that doesn't hang a piece");
 			analysis.done();

@@ -15,9 +15,10 @@ public class BestAnalyzer implements PositionAnalyzer {
 		if (withShuffledMoves)
 			moveGenerator = new MoveShuffler(moveGenerator);
 		PositionAnalyzer analyzer = new CompositePositionAnalyzer(
-				new TakeHangingPieceAnalyzer(moveGenerator),
+				new GenerateMoveListAnalyzer(moveGenerator),
+				new TakeHangingPieceAnalyzer(),
 				new FindMoveThatDoesntHangPieceAnalyzer(moveGenerator),
-				new PickAnyMoveAnalyzer(moveGenerator));
+				new PickAnyMoveAnalyzer());
 		this.analyzer = analyzer;
 	}
 	
