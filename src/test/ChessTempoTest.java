@@ -5,13 +5,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import engine.Analysis;
-import engine.PositionAnalyzer;
 import engine.VirtualBoard;
-import engine.analyzers.CompositePositionAnalyzer;
-import engine.analyzers.FindMoveThatDoesntHangPieceAnalyzer;
-import engine.analyzers.PickAnyMoveAnalyzer;
-import engine.analyzers.TakeHangingPieceAnalyzer;
-import lucid.LucidMoveGenerator;
+import engine.analyzers.BestAnalyzer;
 
 public class ChessTempoTest {
 	@Test
@@ -30,13 +25,8 @@ public class ChessTempoTest {
 	}
 	
 	private void test(String fen, String bestMove) {
-		LucidMoveGenerator moveGenerator = new LucidMoveGenerator();
-		PositionAnalyzer analyzer = new CompositePositionAnalyzer(
-				new TakeHangingPieceAnalyzer(moveGenerator),
-				new FindMoveThatDoesntHangPieceAnalyzer(moveGenerator),
-				new PickAnyMoveAnalyzer(moveGenerator));
 		VirtualBoard board = new VirtualBoard(fen);
-		Analysis analysis = analyzer.improveAnalysis(new Analysis(board));
+		Analysis analysis = new BestAnalyzer(false).improveAnalysis(new Analysis(board));
 		assertEquals(bestMove, analysis.getBestMove());
 	}	
 	

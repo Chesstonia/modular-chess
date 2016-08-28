@@ -1,12 +1,13 @@
 package test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
 
-import engine.*;
-import engine.analyzers.*;
-import lucid.LucidMoveGenerator;
+import engine.Analysis;
+import engine.VirtualBoard;
+import engine.analyzers.BestAnalyzer;
 
 public class BasicTest {
 
@@ -21,24 +22,14 @@ public class BasicTest {
 	}
 	
 	private void test(String fen, String bestMove) {
-		LucidMoveGenerator moveGenerator = new LucidMoveGenerator();
-		PositionAnalyzer analyzer = new CompositePositionAnalyzer(
-				new TakeHangingPieceAnalyzer(moveGenerator),
-				new FindMoveThatDoesntHangPieceAnalyzer(moveGenerator),
-				new PickAnyMoveAnalyzer(moveGenerator));
 		VirtualBoard board = new VirtualBoard(fen);
-		Analysis analysis = analyzer.improveAnalysis(new Analysis(board));
+		Analysis analysis = new BestAnalyzer(false).improveAnalysis(new Analysis(board));
 		assertEquals(bestMove, analysis.getBestMove());
 	}	
 	
 	private void testNot(String fen, String badMove) {
-		LucidMoveGenerator moveGenerator = new LucidMoveGenerator();
-		PositionAnalyzer analyzer = new CompositePositionAnalyzer(
-				new TakeHangingPieceAnalyzer(moveGenerator),
-				new FindMoveThatDoesntHangPieceAnalyzer(moveGenerator),
-				new PickAnyMoveAnalyzer(moveGenerator));
 		VirtualBoard board = new VirtualBoard(fen);
-		Analysis analysis = analyzer.improveAnalysis(new Analysis(board));
+		Analysis analysis = new BestAnalyzer(false).improveAnalysis(new Analysis(board));
 		assertNotEquals(badMove, analysis.getBestMove());
 	}
 

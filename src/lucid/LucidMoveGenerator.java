@@ -23,7 +23,6 @@ public class LucidMoveGenerator implements MoveGenerator {
 
 	private ArrayList<String> translateLucidMovesToVirtual(Board board, MoveList list) {
 		ArrayList<String> result = new ArrayList<String>();
-		LucidSquareTranslator translator = new LucidSquareTranslator();
 		for (Move move : list){
 			result.add(MoveFactory.toSAN(board,  move,  false));
 		}

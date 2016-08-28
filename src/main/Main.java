@@ -1,11 +1,14 @@
 package main;
 
-import engine.*;
-import engine.analyzers.*;
 import java.util.Scanner;
 import java.util.Stack;
 
-import lucid.LucidMoveGenerator;
+import engine.Analysis;
+import engine.MoveMaker;
+import engine.MoveValidator;
+import engine.PositionAnalyzer;
+import engine.VirtualBoard;
+import engine.analyzers.BestAnalyzer;
 import lucid.LucidMoveMaker;
 import lucid.LucidMoveValidator;
 
@@ -13,11 +16,7 @@ public class Main {
 	public static void main(String[] args) {
 		MoveValidator validator = new LucidMoveValidator();
 		MoveMaker moveMaker = new LucidMoveMaker();
-		MoveGenerator moveGenerator = new MoveShuffler(new LucidMoveGenerator());
-		PositionAnalyzer analyzer = new CompositePositionAnalyzer(
-				new TakeHangingPieceAnalyzer(moveGenerator),
-				new FindMoveThatDoesntHangPieceAnalyzer(moveGenerator),
-				new PickAnyMoveAnalyzer(moveGenerator));
+		PositionAnalyzer analyzer = new BestAnalyzer(true);
 		VirtualBoard board = new VirtualBoard("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
 		Stack<String> previous = new Stack<String>();
 		
