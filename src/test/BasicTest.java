@@ -30,6 +30,7 @@ public class BasicTest {
 		Analysis analysis = analyzer.improveAnalysis(new Analysis(board));
 		assertEquals(bestMove, analysis.getBestMove());
 	}	
+	
 	private void testNot(String fen, String badMove) {
 		LucidMoveGenerator moveGenerator = new LucidMoveGenerator();
 		PositionAnalyzer analyzer = new CompositePositionAnalyzer(
