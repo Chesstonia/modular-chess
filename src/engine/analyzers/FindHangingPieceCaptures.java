@@ -4,7 +4,7 @@ import java.util.List;
 
 import engine.*;
 
-public class FindMovesToTakeHangingPiecesAnalyzer implements PositionAnalyzer {
+public class FindHangingPieceCaptures implements PositionAnalyzer {
 
 	@Override
 	public Analysis improveAnalysis(Analysis analysis) {

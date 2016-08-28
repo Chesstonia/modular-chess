@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import engine.Analysis;
 import engine.VirtualBoard;
-import engine.analyzers.BestAnalyzer;
+import engine.analyzers.TopLevelAlgorithm;
 
 public class BasicTest {
 
@@ -23,13 +23,13 @@ public class BasicTest {
 	
 	private void test(String fen, String bestMove) {
 		VirtualBoard board = new VirtualBoard(fen);
-		Analysis analysis = new BestAnalyzer(false).improveAnalysis(new Analysis(board));
+		Analysis analysis = new TopLevelAlgorithm(false).improveAnalysis(new Analysis(board));
 		assertEquals(bestMove, analysis.getBestMove());
 	}	
 	
 	private void testNot(String fen, String badMove) {
 		VirtualBoard board = new VirtualBoard(fen);
-		Analysis analysis = new BestAnalyzer(false).improveAnalysis(new Analysis(board));
+		Analysis analysis = new TopLevelAlgorithm(false).improveAnalysis(new Analysis(board));
 		assertNotEquals(badMove, analysis.getBestMove());
 	}
 

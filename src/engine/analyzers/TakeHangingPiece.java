@@ -1,9 +1,8 @@
 package engine.analyzers;
 
-import engine.Analysis;
-import engine.PositionAnalyzer;
+import engine.*;
 
-public class TakeHangingPieceAnalyzer implements PositionAnalyzer {
+public class TakeHangingPiece implements PositionAnalyzer {
 
 	@Override
 	public Analysis improveAnalysis(Analysis analysis) {

@@ -8,10 +8,10 @@ import net.humbleprogrammer.humble.BitUtil;
 import net.humbleprogrammer.maxx.*;
 import net.humbleprogrammer.maxx.factories.BoardFactory;
 
-public class FindMoveThatDoesntHangPieceAnalyzer implements PositionAnalyzer {
+public class FindMoveThatDoesntHangPiece implements PositionAnalyzer {
 	private MoveGenerator generator;
 
-	public FindMoveThatDoesntHangPieceAnalyzer(MoveGenerator generator){
+	public FindMoveThatDoesntHangPiece(MoveGenerator generator){
 		this.generator = generator;
 	}
 	

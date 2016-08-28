@@ -2,16 +2,12 @@ package engine.analyzers;
 
 import java.util.List;
 
-import engine.Analysis;
-import engine.MoveGenerator;
-import engine.PositionAnalyzer;
-import engine.Tag;
-import engine.VirtualBoard;
+import engine.*;
 
-public class GenerateMoveListAnalyzer implements PositionAnalyzer {
+public class GenerateMoveList implements PositionAnalyzer {
 	private MoveGenerator generator;
 
-	public GenerateMoveListAnalyzer(MoveGenerator generator){
+	public GenerateMoveList(MoveGenerator generator){
 		this.generator = generator;
 	}
 	

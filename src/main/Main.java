@@ -8,7 +8,7 @@ import engine.MoveMaker;
 import engine.MoveValidator;
 import engine.PositionAnalyzer;
 import engine.VirtualBoard;
-import engine.analyzers.BestAnalyzer;
+import engine.analyzers.TopLevelAlgorithm;
 import lucid.LucidMoveMaker;
 import lucid.LucidMoveValidator;
 
@@ -16,7 +16,7 @@ public class Main {
 	public static void main(String[] args) {
 		MoveValidator validator = new LucidMoveValidator();
 		MoveMaker moveMaker = new LucidMoveMaker();
-		PositionAnalyzer analyzer = new BestAnalyzer(true);
+		PositionAnalyzer analyzer = new TopLevelAlgorithm(true);
 		VirtualBoard board = new VirtualBoard("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
 		Stack<String> previous = new Stack<String>();
 		

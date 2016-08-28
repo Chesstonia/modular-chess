@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import engine.Analysis;
 import engine.VirtualBoard;
-import engine.analyzers.BestAnalyzer;
+import engine.analyzers.TopLevelAlgorithm;
 
 public class ChessTempoTest {
 	@Test
@@ -26,7 +26,7 @@ public class ChessTempoTest {
 	
 	private void test(String fen, String bestMove) {
 		VirtualBoard board = new VirtualBoard(fen);
-		Analysis analysis = new BestAnalyzer(false).improveAnalysis(new Analysis(board));
+		Analysis analysis = new TopLevelAlgorithm(false).improveAnalysis(new Analysis(board));
 		assertEquals(bestMove, analysis.getBestMove());
 	}	
 	
