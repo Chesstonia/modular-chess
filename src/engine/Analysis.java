@@ -55,4 +55,11 @@ public class Analysis {
 		throw new RuntimeException();
 	}
 
+	public boolean hasTag(String tagName) {
+		for (Tag tag : tags)
+			if (tag.getName().equals(tagName))
+				return true;
+		return false;
+	}
+
 }
