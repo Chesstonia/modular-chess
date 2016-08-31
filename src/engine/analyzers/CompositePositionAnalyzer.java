@@ -16,6 +16,6 @@ public class CompositePositionAnalyzer implements PositionAnalyzer {
 			if (analysis.isComplete())
 				return analysis;
 		}
-		return null;
+		return analysis;
 	}
 }

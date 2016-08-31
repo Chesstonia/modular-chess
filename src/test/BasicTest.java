@@ -21,6 +21,11 @@ public class BasicTest {
 		testNot("8/p7/8/1P6/8/8/8/5k1K b - -", "a6");
 	}
 	
+	@Test
+	public void takesProtectedPiecesWhenPossible(){
+		//test("2k5/3q4/4r3/5B2/6Q1/7K/8/8 w - -", "Bxe6");
+	}
+	
 	private void test(String fen, String bestMove) {
 		VirtualBoard board = new VirtualBoard(fen);
 		Analysis analysis = new TopLevelAlgorithm(false).improveAnalysis(new Analysis(board));
