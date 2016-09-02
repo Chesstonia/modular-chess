@@ -62,4 +62,8 @@ public class Analysis {
 		return false;
 	}
 
+	public List<Tag> getTags() {
+		return tags;
+	}
+
 }

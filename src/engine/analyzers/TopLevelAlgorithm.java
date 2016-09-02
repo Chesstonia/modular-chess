@@ -13,6 +13,7 @@ public class TopLevelAlgorithm implements PositionAnalyzer {
 			moveGenerator = new MoveShuffler(moveGenerator);
 		PositionAnalyzer analyzer = new CompositePositionAnalyzer(
 				new GenerateMoveList(moveGenerator),
+				new NoteAttackersAndDefenders(),
 				new FindHangingPieces(),
 				new FindHangingPieceCaptures(),
 				new TakeHangingPiece(),

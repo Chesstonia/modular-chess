@@ -7,6 +7,7 @@ import engine.Analysis;
 import engine.MoveMaker;
 import engine.MoveValidator;
 import engine.PositionAnalyzer;
+import engine.Tag;
 import engine.VirtualBoard;
 import engine.analyzers.TopLevelAlgorithm;
 import lucid.LucidMoveMaker;
@@ -73,6 +74,8 @@ public class Main {
 		Analysis analysis = analyzer.improveAnalysis(new Analysis(board));
 		String move = analysis.getBestMove();
 		System.out.println("reason: " + analysis.getReasoning());
+		for (Tag tag : analysis.getTags())
+			System.out.println("tag: " + tag.toString());
 		previous.push(board.getFEN());
 		previousMoves.push(move);
 		moveMaker.makeMove(move, board);

@@ -27,4 +27,10 @@ public class Tag {
 		return parameters;
 	}
 
+	public String toString(){
+		String result = tagName;
+		for (String parameter : parameters)
+			result += " " + parameter;
+		return result;
+	}
 }
