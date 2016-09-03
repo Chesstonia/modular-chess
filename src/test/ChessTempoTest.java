@@ -21,7 +21,12 @@ public class ChessTempoTest {
 	
 	@Test
 	public void Problem56642_416(){
-		//test("2qb2k1/1b3ppp/pp1P4/4p3/Q7/P7/1P2NPPP/3R2K1 w - - 0 1", "Qe8");
+		test("2qb2k1/1b3ppp/pp1P4/4p3/Q7/P7/1P2NPPP/3R2K1 w - - 0 1", "Qe8");
+	}
+	
+	@Test
+	public void Problem93323_416(){
+		test("8/R5p1/5p1p/4r1k1/6P1/6K1/8/8 w - - 0 1", "Rxg7");
 	}
 	
 	private void test(String fen, String bestMove) {
