@@ -18,6 +18,7 @@ public class TopLevelAlgorithm implements PositionAnalyzer {
 				new FindHangingPieces(),
 				new FindHangingPieceCaptures(),
 				new TakeHangingPiece(),
+				new TakeStrongerPiece(),
 				new FindMoveThatDoesntHangPiece(moveGenerator),
 				new PickAnyMove());
 		this.analyzer = analyzer;

@@ -1,8 +1,5 @@
 package engine.analyzers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import engine.Analysis;
 import engine.PositionAnalyzer;
 import engine.Tag;
@@ -32,20 +29,22 @@ public class NoteAttackersAndDefenders implements PositionAnalyzer {
 			if (color == Constants.INVALID)
 				continue;
 			
-			tagAll(analysis, board, i, color, "Defenders");
-			tagAll(analysis, board, i, color ^ 1, "Attackers");
+			tagAll(analysis, board, i, color, "Defends");
+			tagAll(analysis, board, i, color ^ 1, "Attacks");
 		}
+		analysis.addTag(new Tag("DoneAttackersAndDefenders"));
 		return analysis;
 	}
 
 	private void tagAll(Analysis analysis, Board board, int square, int color, String tagName) {
-		List<String> parameters = new ArrayList<String>();
-		for ( long bb = Evaluator.getAttackedBy(board, square, color); bb != 0L; bb &= (bb - 1) )
-			parameters.add(translator.get(BitUtil.first(bb)));
-		if (!parameters.isEmpty()){
-			parameters.add(0, translator.get(square));
-			analysis.addTag(new Tag(tagName, parameters));
+		String targetSquare = translator.get(square);
+		String targetType = translator.getPieceType(board, square);
+		for ( long bb = Evaluator.getAttackedBy(board, square, color); bb != 0L; bb &= (bb - 1) ){
+			int lucidAttackerSquare = BitUtil.first(bb);
+			String attackerSquare = translator.get(lucidAttackerSquare);
+			String attackerType = translator.getPieceType(board, lucidAttackerSquare);
+			Tag tag = new Tag(tagName, targetType, targetSquare, attackerType, attackerSquare);
+			analysis.addTag(tag);
 		}
 	}
-
 }

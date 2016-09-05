@@ -1,6 +1,7 @@
 package engine;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Tag {
@@ -8,6 +9,10 @@ public class Tag {
 	private String tagName;
 	private List<String> parameters;
 
+	public Tag(String tagName, String...parameters){
+		this(tagName, Arrays.asList(parameters));
+	}
+	
 	public Tag(String tagName, List<String> parameters) {
 		this.tagName = tagName;
 		this.parameters = parameters;
@@ -19,6 +24,10 @@ public class Tag {
 		parameters.add(parameter);
 	}
 
+	public Tag(String tagName){
+		this(tagName, new ArrayList<String>());
+	}
+	
 	public String getName() {
 		return this.tagName;
 	}

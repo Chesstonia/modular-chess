@@ -2,6 +2,8 @@ package engine;
 
 import java.util.List;
 
+import engine.tagcollections.PieceAttackingStrongerPieceCollection;
+
 public class Analysis {
 	private String bestMove = "";
 	private String reason = "because";
@@ -14,7 +16,7 @@ public class Analysis {
 		this.reason = "";
 		this.board = board;
 		this.done = false;
-		this.tagCollection = new SimpleTagCollection();
+		this.tagCollection = new PieceAttackingStrongerPieceCollection(new SimpleTagCollection());
 	}
 
 	public String getBestMove() {

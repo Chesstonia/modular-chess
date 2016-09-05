@@ -2,6 +2,10 @@ package lucid;
 
 import java.util.ArrayList;
 
+import net.humbleprogrammer.maxx.Board;
+import net.humbleprogrammer.maxx.Constants;
+import net.humbleprogrammer.maxx.Piece;
+
 public class LucidSquareTranslator {
 
 	private ArrayList<String> squares;
@@ -35,5 +39,18 @@ public class LucidSquareTranslator {
 
 	public String get(int iSqFrom) {
 		return squares.get(iSqFrom);
+	}
+
+	public String getPieceType(Board board, int square) {
+		int type = Piece.getType(board.get(square));
+		switch (type){
+		case Constants.PAWN: return "Pawn";
+		case Constants.KNIGHT: return "Knight";
+		case Constants.BISHOP: return "Bishop";
+		case Constants.ROOK: return "Rook";
+		case Constants.QUEEN: return "Queen";
+		case Constants.KING: return "King";
+		default: throw new RuntimeException("Unable to translate piece type of " + type);
+		}
 	}
 }
