@@ -2,6 +2,7 @@ package engine.analyzers;
 
 import engine.Analysis;
 import engine.PositionAnalyzer;
+import engine.Tag;
 import net.humbleprogrammer.maxx.Arbiter;
 import net.humbleprogrammer.maxx.Board;
 import net.humbleprogrammer.maxx.Move;
@@ -27,6 +28,7 @@ public class FindMates implements PositionAnalyzer {
                 		if (responses.isEmpty()){
                 			String moveNotation = MoveFactory.toSAN(bd,  mv,  false);
                 			analysis.log("found a mate! " + moveNotation);
+                			analysis.addTag(new Tag("Mate", moveNotation));
 							analysis.setBestMove(moveNotation, "Mate");
                 			analysis.done();
                 			break;

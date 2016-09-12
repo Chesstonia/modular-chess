@@ -26,7 +26,9 @@ public class FindMoveThatDoesntHangPiece implements PositionAnalyzer {
 			new ExpandTree(virtualMove, moveMaker).improveAnalysis(analysis);
 			Analysis analysis2 = analysis.analysisAfter(virtualMove);
 			new FindTacticalMotifs(new LucidMoveGenerator()).improveAnalysis(analysis2);
-			if (!analysis2.hasTag("HangingPieceOn") && !analysis2.hasTag("PieceAttackingStrongerPiece")){
+			if (!analysis2.hasTag("HangingPieceOn") && 
+				!analysis2.hasTag("PieceAttackingStrongerPiece") && 
+				!analysis2.hasTag("Mate")){
 				return virtualMove;
 			}
 		}
