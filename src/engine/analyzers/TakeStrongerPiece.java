@@ -14,6 +14,7 @@ public class TakeStrongerPiece implements PositionAnalyzer {
 		String target = tag.getParameters().get(1);
 		for (String move : moves.getParameters())
 			if (move.contains("x" + target)){
+				analysis.log("found a move that captures a strong piece with a weaker one");
 				analysis.setBestMove(move, "Take a stronger piece");
 				analysis.done();
 			}

@@ -29,13 +29,13 @@ public class BasicTest {
 	private void test(String fen, String bestMove) {
 		VirtualBoard board = new VirtualBoard(fen);
 		Analysis analysis = new TopLevelAlgorithm(false).improveAnalysis(new Analysis(board));
-		assertEquals(bestMove, analysis.getBestMove());
+		assertEquals(analysis.toString(), bestMove, analysis.getBestMove());
 	}	
 	
 	private void testNot(String fen, String badMove) {
 		VirtualBoard board = new VirtualBoard(fen);
 		Analysis analysis = new TopLevelAlgorithm(false).improveAnalysis(new Analysis(board));
-		assertNotEquals(badMove, analysis.getBestMove());
+		assertNotEquals(analysis.toString(), badMove, analysis.getBestMove());
 	}
 
 }

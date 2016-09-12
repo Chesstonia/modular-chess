@@ -10,6 +10,7 @@ public class TakeHangingPiece implements PositionAnalyzer {
 			return analysis;
 		String move = analysis.getTag("HangingPieceCapture").getParameters().get(0);
 		analysis.setBestMove(move, "take hanging piece");
+		analysis.log("Playing " + move + " to take a hanging piece");
 		analysis.done();
 		return analysis;
 	}

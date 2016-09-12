@@ -19,8 +19,12 @@ public class PieceAttackingStrongerPieceCollection implements TagCollection {
 		if (!tag.getName().equals("Attacks"))
 			return;
 		List<String> parameters = tag.getParameters();
-		if (isBetterPiece(parameters.get(0), parameters.get(2)))
-			underlyingCollection.addTag(new Tag("PieceAttackingStrongerPiece", parameters.get(3), parameters.get(1)));
+		String attackedPieceType = parameters.get(0);
+		String attackingPieceType = parameters.get(2);
+		if (isBetterPiece(attackedPieceType, attackingPieceType)){
+			Tag newTag = new Tag("PieceAttackingStrongerPiece", parameters.get(3), parameters.get(1));
+			underlyingCollection.addTag(newTag);
+		}
 	}
 
 	private boolean isBetterPiece(String betterPiece, String worsePiece) {

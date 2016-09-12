@@ -16,6 +16,7 @@ public class GenerateMoveList implements PositionAnalyzer {
 		VirtualBoard board = analysis.getBoard();
 		List<String> moves = generator.generateMoves(board);
 		Tag tag = new Tag("MoveList", moves);
+		analysis.log("generating list of moves");
 		return analysis.addTag(tag);
 	}
 

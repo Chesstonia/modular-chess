@@ -12,10 +12,15 @@ public class FindHangingPieceCaptures implements PositionAnalyzer {
 		if (!analysis.hasTag("HangingPieceOn"))
 			return analysis;
 		List<String> hangingPieceSquares = analysis.getTag("HangingPieceOn").getParameters();
-		for (String hangingPieceSquare : hangingPieceSquares)
-			for (String move : moves)
-				if (move.contains(hangingPieceSquare))
+		for (String hangingPieceSquare : hangingPieceSquares){
+			analysis.log("Trying to find a way to capture the hanging piece on " + hangingPieceSquare);
+			for (String move : moves){
+				if (move.contains(hangingPieceSquare)){
+					analysis.log(move + " does it!");
 					analysis.addTag(new Tag("HangingPieceCapture", move));
+				}
+			}
+		}
 		return analysis;
 	}
 

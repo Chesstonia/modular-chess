@@ -16,6 +16,7 @@ public class FindHangingPieces implements PositionAnalyzer {
         {
 			String square = Square.toString(BitUtil.first(bb));
 			analysis.addTag(new Tag("HangingPieceOn", square));
+			analysis.log("found a hanging piece on " + square);
         }
 		return analysis;
 	}

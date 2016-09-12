@@ -6,20 +6,27 @@ import lucid.LucidMoveGenerator;
 public class TopLevelAlgorithm implements PositionAnalyzer {
 
 	private PositionAnalyzer analyzer;
+	private MoveGenerator moveGenerator;
 
+	public TopLevelAlgorithm(MoveGenerator moveGenerator){
+		this.moveGenerator = moveGenerator;
+		
+		initialize();
+	}
+	
 	public TopLevelAlgorithm(boolean withShuffledMoves){
-		MoveGenerator moveGenerator = new LucidMoveGenerator();
+		this.moveGenerator = new LucidMoveGenerator();
 		if (withShuffledMoves)
 			moveGenerator = new MoveShuffler(moveGenerator);
+		initialize();
+	}
+	
+	private void initialize() {
 		PositionAnalyzer analyzer = new CompositePositionAnalyzer(
-				new GenerateMoveList(moveGenerator),
-				new FindMates(),
-				new NoteAttackersAndDefenders(),
-				new FindHangingPieces(),
-				new FindHangingPieceCaptures(),
+				new FindTacticalMotifs(moveGenerator),
 				new TakeHangingPiece(),
 				new TakeStrongerPiece(),
-				new FindMoveThatDoesntHangPiece(moveGenerator),
+				new FindMoveThatDoesntHangPiece(),
 				new PickAnyMove());
 		this.analyzer = analyzer;
 	}

@@ -25,7 +25,9 @@ public class FindMates implements PositionAnalyzer {
                 if (Arbiter.isInCheck( bdNew )){
                         MoveList responses = MoveList.generate(bdNew);
                 		if (responses.isEmpty()){
-                			analysis.setBestMove(MoveFactory.toSAN(bd,  mv,  false), "Mate");
+                			String moveNotation = MoveFactory.toSAN(bd,  mv,  false);
+                			analysis.log("found a mate! " + moveNotation);
+							analysis.setBestMove(moveNotation, "Mate");
                 			analysis.done();
                 			break;
                 		}

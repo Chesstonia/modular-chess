@@ -28,10 +28,10 @@ public class NoteAttackersAndDefenders implements PositionAnalyzer {
 			int color = Piece.getColor(piece);
 			if (color == Constants.INVALID)
 				continue;
-			
 			tagAll(analysis, board, i, color, "Defends");
 			tagAll(analysis, board, i, color ^ 1, "Attacks");
 		}
+		analysis.log("noting attackers and defenders");
 		analysis.addTag(new Tag("DoneAttackersAndDefenders"));
 		return analysis;
 	}

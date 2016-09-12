@@ -73,9 +73,9 @@ public class Main {
 	private static void go(MoveMaker moveMaker, PositionAnalyzer analyzer, VirtualBoard board, Stack<String> previous, Stack<String> previousMoves) {
 		Analysis analysis = analyzer.improveAnalysis(new Analysis(board));
 		String move = analysis.getBestMove();
-		System.out.println("reason: " + analysis.getReasoning());
 		for (Tag tag : analysis.getTags())
 			System.out.println("tag: " + tag.toString());
+		System.out.println("reason: " + analysis.getReasoning());
 		previous.push(board.getFEN());
 		previousMoves.push(move);
 		moveMaker.makeMove(move, board);
